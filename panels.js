@@ -56,8 +56,8 @@ $.panels = (function($, window, document, undefined) {
             allWidth += $(this).data('width') + (margin.left * 2);
             // Reset margins
             $(this).css({
-                'margin-right': 0,
-                'margin-bottom': 0,
+                marginRight: 0,
+                marginBottom: 0,
             });
         });
 
@@ -144,9 +144,9 @@ $.panels = (function($, window, document, undefined) {
             // }, duration);
 
             $(columns[i][0]).animate({
-                'margin-top': margin.top,
+                marginTop: margin.top,
             }, duration / parseInt($(columns[i][0]).css('margin-top'))).animate({
-                'margin-left': margin.left
+                marginLeft: margin.left
             }, duration / parseInt($(columns[i][0]).css('margin-left')));
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
@@ -164,9 +164,9 @@ $.panels = (function($, window, document, undefined) {
                 // }, duration);
 
                 $(columns[i][j]).animate({
-                    'margin-top': thisTopMargin,
+                    marginTop': thisTopMargin,
                 }, duration / thisTopMargin).animate({
-                    'margin-left': -$(columns[i][j - 1]).data('width')
+                    marginLeft: -$(columns[i][j - 1]).data('width')
                 }, duration / $(columns[i][j - 1]).data('width'))
             }
         }
