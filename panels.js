@@ -145,9 +145,8 @@ $.panels = (function($, window, document, undefined) {
 
             $(columns[i][0]).animate({
                 marginTop: margin.top,
-            }, duration / parseInt($(columns[i][0]).css('margin-top'))).animate({
                 marginLeft: margin.left
-            }, duration / parseInt($(columns[i][0]).css('margin-left')));
+            }, duration);
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
             for (var j = 1, columnLength = columns[i].length; j < columnLength; j++) {
@@ -165,9 +164,8 @@ $.panels = (function($, window, document, undefined) {
 
                 $(columns[i][j]).animate({
                     marginTop: thisTopMargin,
-                }, duration / thisTopMargin).animate({
                     marginLeft: -$(columns[i][j - 1]).data('width')
-                }, duration / $(columns[i][j - 1]).data('width'))
+                }, duration);
             }
         }
     };
