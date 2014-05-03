@@ -119,8 +119,15 @@ $.panels = (function($, window, document, undefined) {
         return false; // There is no previous columns array built, or the new and old ones are the same
     }
 
-    // Redo the layout of the panels
+    var colWidth = function(column) {
+        var width = 0;
+        for (var i = 0, columnLength = column.length; i < columnLength; i++) {
+            if ($(column[i]).data('width') > width) width = $(column[i]).data('width');
+        };
+        return width + margin.left;
+    }
 
+    // Redo the layout of the panels
     var doLayout = function() {
 
         clearTimeout(resizeTimeout);
@@ -149,22 +156,25 @@ $.panels = (function($, window, document, undefined) {
             }, duration);
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
+            var prevLeftMargin = margin.left;
             for (var j = 1, columnLength = columns[i].length; j < columnLength; j++) {
 
 
                 var thisPanelWidth = $(columns[i][j]).data('width') + (margin.left * 2);
 
                 var thisTopMargin = $(columns[i][j - 1]).data('height') + (margin.top * 2) + prevTopMargin;
+                var thisLeftMargin = Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin);
                 prevTopMargin = thisTopMargin - margin.top;
+                prevLeftMargin = thisLeftMargin;
 
                 // $(columns[i][j]).animate({
-                //     'margin-top': thisTopMargin,
-                //     'margin-left': -$(columns[i][j - 1]).data('width') // - (margin.left) // this is not needed if the panel-inner margin is to match the margin it makes with the wrapper
+                //     marginTop: thisTopMargin,
+                //     marginLeft: -$(columns[i][j - 1]).data('width') // - (margin.left) // this is not needed if the panel-inner margin is to match the margin it makes with the wrapper
                 // }, duration);
 
                 $(columns[i][j]).animate({
                     marginTop: thisTopMargin,
-                    marginLeft: -$(columns[i][j - 1]).data('width')
+                    marginLeft: -thisLeftMargin
                 }, duration);
             }
         }
