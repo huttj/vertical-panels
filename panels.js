@@ -164,7 +164,7 @@ $.panels = (function($, window, document, undefined) {
                 // }, duration);
 
                 $(columns[i][j]).animate({
-                    marginTop': thisTopMargin,
+                    marginTop: thisTopMargin,
                 }, duration / thisTopMargin).animate({
                     marginLeft: -$(columns[i][j - 1]).data('width')
                 }, duration / $(columns[i][j - 1]).data('width'))
