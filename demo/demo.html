@@ -16,8 +16,10 @@ html, body {
     overflow-y: hidden;
 }
 #PanelsWrapper {
-    width: 3000px;
+    width: 10000px;
     height: 100%;
+    overflow: hidden;
+    white-space: nowrap
 }
 .Panel {
     height: 400px;
@@ -25,7 +27,7 @@ html, body {
     background-color: blue;
     display: inline-block;
     float: left;
-    margin: 10px;
+    margin: 15px 30px;
     color: white;
     position: relative;
     /* To center the text */
@@ -34,6 +36,7 @@ html, body {
     font-family:'Segoe UI';
     background-color: #FF5800;
     font-size: 20px;
+    transition: margin 500ms ease;
 }
 .one {
     height: 300px;
@@ -97,7 +100,13 @@ html, body {
     <script src="js/jquery.mousewheel.min.js"></script>
     <script src="../panels.js"></script>
     <script>
-      Panels.runAll();
+      $.panels({
+        containerID:'#PanelsContainer',
+        wrapperID:  '#PanelsWrapper',
+        panelClass: '.Panel',
+        duration: 333,
+        delay: 100
+      });
     </script
 
 </body>
