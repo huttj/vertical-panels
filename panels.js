@@ -152,9 +152,8 @@ $.panels = (function($, window, document, undefined) {
 
             $(columns[i][0]).animate({
                 'margin-top': margin.top,
-            }, duration / parseInt($(columns[i][0]).css('margin-top'))).animate({
                 'margin-left': margin.left
-            }, duration / parseInt($(columns[i][0]).css('margin-left')));
+            }, duration);
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
             var prevLeftMargin = margin.left;
@@ -164,7 +163,9 @@ $.panels = (function($, window, document, undefined) {
                 var thisPanelWidth = $(columns[i][j]).data('width') + (margin.left * 2);
 
                 var thisTopMargin = $(columns[i][j - 1]).data('height') + (margin.top * 2) + prevTopMargin;
+                var thisLeftMargin = Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin);
                 prevTopMargin = thisTopMargin - margin.top;
+                prevLeftMargin = thisLeftMargin;
 
                 // $(columns[i][j]).animate({
                 //     'margin-top': thisTopMargin,
@@ -173,10 +174,10 @@ $.panels = (function($, window, document, undefined) {
 
                 $(columns[i][j]).animate({
                     'margin-top': thisTopMargin,
-                }, duration / thisTopMargin).animate({
-                    'margin-left': -Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin)
-                }, duration / Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin));
-                prevLeftMargin = Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin);
+                    'margin-left': -thisLeftMargin
+                }, duration);
+
+
             }
         }
     };
