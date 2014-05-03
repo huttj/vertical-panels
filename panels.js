@@ -56,8 +56,8 @@ $.panels = (function($, window, document, undefined) {
             allWidth += $(this).data('width') + (margin.left * 2);
             // Reset margins
             $(this).css({
-                'margin-right': 0,
-                'margin-bottom': 0,
+                marginRight: 0,
+                marginBottom: 0
             });
         });
 
@@ -151,8 +151,8 @@ $.panels = (function($, window, document, undefined) {
             // }, duration);
 
             $(columns[i][0]).animate({
-                'margin-top': margin.top,
-                'margin-left': margin.left
+                marginTop: margin.top,
+                marginLeft: margin.left
             }, duration);
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
@@ -168,13 +168,13 @@ $.panels = (function($, window, document, undefined) {
                 prevLeftMargin = thisLeftMargin;
 
                 // $(columns[i][j]).animate({
-                //     'margin-top': thisTopMargin,
-                //     'margin-left': -$(columns[i][j - 1]).data('width') // - (margin.left) // this is not needed if the panel-inner margin is to match the margin it makes with the wrapper
+                //     marginTop: thisTopMargin,
+                //     marginLeft: -$(columns[i][j - 1]).data('width') // - (margin.left) // this is not needed if the panel-inner margin is to match the margin it makes with the wrapper
                 // }, duration);
 
                 $(columns[i][j]).animate({
-                    'margin-top': thisTopMargin,
-                    'margin-left': -thisLeftMargin
+                    marginTop: thisTopMargin,
+                    marginLeft: -thisLeftMargin
                 }, duration);
 
 
