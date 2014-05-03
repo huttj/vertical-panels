@@ -119,8 +119,15 @@ $.panels = (function($, window, document, undefined) {
         return false; // There is no previous columns array built, or the new and old ones are the same
     }
 
-    // Redo the layout of the panels
+    var colWidth = function(column) {
+        var width = 0;
+        for (var i = 0, columnLength = column.length; i < columnLength; i++)  {
+            if ($(column[i]).data('width') > width) width = $(column[i]).data('width');
+        };
+        return width + margin.left;
+    }
 
+    // Redo the layout of the panels
     var doLayout = function() {
 
         clearTimeout(resizeTimeout);
@@ -150,6 +157,7 @@ $.panels = (function($, window, document, undefined) {
             }, duration / parseInt($(columns[i][0]).css('margin-left')));
 
             var prevTopMargin = 0 // margin.top; again, to make the inner margins match the top and left margins
+            var prevLeftMargin = margin.left;
             for (var j = 1, columnLength = columns[i].length; j < columnLength; j++) {
 
 
@@ -166,8 +174,9 @@ $.panels = (function($, window, document, undefined) {
                 $(columns[i][j]).animate({
                     'margin-top': thisTopMargin,
                 }, duration / thisTopMargin).animate({
-                    'margin-left': -$(columns[i][j - 1]).data('width')
-                }, duration / $(columns[i][j - 1]).data('width'))
+                    'margin-left': -Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin)
+                }, duration / Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin));
+                prevLeftMargin = Math.max($(columns[i][j - 1]).data('width'), prevLeftMargin);
             }
         }
     };
